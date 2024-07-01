@@ -24,17 +24,17 @@ jobs:
 
     - name: Build and Publish for Linux-x64
       run: |
-        dotnet publish -c Release -r linux-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./publish/linux-x64/
+        dotnet publish -c Release -r linux-x64 -p:PublishSingleFile=true -o ./publish/linux-x64/
         cp appsettings.json ./publish/linux-x64/
 
     - name: Build and Publish for Linux-arm64
       run: |
-        dotnet publish -c Release -r linux-arm64 -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./publish/linux-arm64/
+        dotnet publish -c Release -r linux-arm64 -p:PublishSingleFile=true -o ./publish/linux-arm64/
         cp appsettings.json ./publish/linux-arm64/
      
     - name: Build and Publish for Windows-x64
       run: |
-        dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./publish/win-x64/
+        dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true  -o ./publish/win-x64/
         cp appsettings.json ./publish/win-x64/
 
     - name: Get current date
