@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AliyunTrafficCheck", "AliyunTrafficCheck.csproj", "{DCFAFCC5-6E4A-41B4-8D6F-5E042B935853}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCFAFCC5-6E4A-41B4-8D6F-5E042B935853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCFAFCC5-6E4A-41B4-8D6F-5E042B935853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCFAFCC5-6E4A-41B4-8D6F-5E042B935853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCFAFCC5-6E4A-41B4-8D6F-5E042B935853}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B99C1BD-4E76-47E0-BDCE-D3A259E4C67A}
+	EndGlobalSection
+EndGlobal

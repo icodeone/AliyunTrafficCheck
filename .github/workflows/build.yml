@@ -1,0 +1,81 @@
+
+name: .NET Build and Publish
+
+on:
+  push:
+    branches: [main, feature/*]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run:  dotnet restore
+
+    - name: Build and Publish for Linux-x64
+      run:  dotnet publish -c Release -r linux-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./publish/linux-x64/
+
+    - name: Build and Publish for Linux-arm64
+      run:  dotnet publish -c Release -r linux-arm64 -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./publish/linux-arm64/
+     
+    - name: Build and Publish for Windows-x64
+      run: dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./publish/win-x64/
+
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"  
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+      with:
+        tag_name: release-${{ steps.date.outputs.date }} 
+        release_name: Release-${{ steps.date.outputs.date }} 
+        draft: false
+        prerelease: false
+        body: "Description of the release"
+
+    - name: Upload Release Asset for Linux-x64
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}  
+        asset_path: ./publish/linux-x64/AliyunTrafficCheck
+        asset_name: AliyunTrafficCheck_amd64  
+        asset_content_type: application/octet-stream
+
+    - name: Upload Release Asset for Linux-arm64
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}  
+        asset_path:  ./publish/linux-x64/AliyunTrafficCheck
+        asset_name: AliyunTrafficCheck_arm64
+        asset_content_type: application/octet-stream
+
+    - name: Upload Release Asset for Windows-x64
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}  
+        asset_path: ./publish/win-x64/AliyunTrafficCheck.exe
+        asset_name: AliyunTrafficCheck_win64.exe
+        asset_content_type: application/octet-stream
+
+
