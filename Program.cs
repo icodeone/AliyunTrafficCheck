@@ -93,9 +93,26 @@ public class Program
         if (!_isClose)
         {
             double traffic = await GetTraffic();
-            if (traffic / 1024 / 1024 / 1024 > _maxTraffic) await ControlInstance("stop");
+            var convertTraffic = traffic / 1024 / 1024 / 1024;
+            WriteLog($"当前已使用流量:{convertTraffic}GB");
+            if (convertTraffic > _maxTraffic)
+            {
+                WriteLog($"当前已超过{_maxTraffic}GB,执行关机任何操作");
+                await ControlInstance("stop");
+            }
+            else
+            {
+                WriteLog($"当前未超过{_maxTraffic}GB,不执行任何操作");
+            }
+           
         }
     }
+
+    static void WriteLog(string log)
+    {
+        Console.WriteLine($"{log} {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+    }
+
     private static async Task PerformAction(Client client, string? instanceId, string action)
     {
         var describeRequest = new DescribeInstanceStatusRequest
@@ -166,6 +183,7 @@ public class Program
     {
         public async Task Execute(IJobExecutionContext context)
         {
+            WriteLog($"执行开机操作");
             await ControlInstance("start");
             _isClose = false;
         }
