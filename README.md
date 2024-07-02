@@ -13,15 +13,17 @@
 
 ### docker(未测试..)
 
-  ```docker build -t $IMAGE_NAME .```
+``` docker build -t $IMAGE_NAME . ```
 
-  ``` docker run -d --name $CONTAINER_NAME \
+```
+docker run -d --name $CONTAINER_NAME \
     -e Credentials__AccessKeyId="your_access_key_id" \
     -e Credentials__AccessKeySecret="your_access_key_secret" \
     -e InstanceId="" \
     -e RegionId="cn-hongkong" \
     -e MaxTraffic="180" \
-    $IMAGE_NAME ```
+    $IMAGE_NAME
+```
 
 ## TODO
 1.linux安装,卸载脚本.
