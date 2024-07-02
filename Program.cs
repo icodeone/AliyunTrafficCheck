@@ -20,7 +20,8 @@ public class Program
 
         var builder = new ConfigurationBuilder()
             .SetBasePath(AppContext.BaseDirectory)
-            .AddJsonFile("appsettings.json", false, true);
+            .AddJsonFile("appsettings.json", false, true)
+            .AddEnvironmentVariables();
         IConfiguration configuration = builder.Build();
         _accessKeyId = configuration["Credentials:AccessKeyId"];
         _accessKeySecret = configuration["Credentials:AccessKeySecret"];
